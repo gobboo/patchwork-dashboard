@@ -21,7 +21,6 @@ export const useSession = defineStore("session", {
 
         const response = await $api<IAuthAppResponse>("/auth/app");
 
-        this.isSigningIn = false;
         this.appId = response.appId;
 				this.expiresAt = new Date(response.expiresAt)
 
@@ -37,7 +36,9 @@ export const useSession = defineStore("session", {
           description:
             "Could not sign in with that API Key, make sure the key is valid.",
         });
-      }
+      } finally {
+        this.isSigningIn = false;
+			}
     },
   },
 	persist: true
