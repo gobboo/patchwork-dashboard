@@ -3,10 +3,11 @@ import type { DropdownMenuItem } from "@nuxt/ui";
 import type { IStreamsResponse } from "~/types";
 
 const { $api } = useNuxtApp();
+const toast = useToast();
 
 const search = ref("");
 
-const { data: streams, status } = await useLazyAsyncData<IStreamsResponse[]>(
+const { data: streams, refresh } = await useLazyAsyncData<IStreamsResponse[]>(
   "streamers",
   () => $api("/streams")
 );
@@ -24,6 +25,13 @@ async function deleteStreamer(id: string) {
     if (!confirmed) return;
 
     await $api(`/streams/${id}`, { method: "DELETE" });
+
+		toast.add({
+      color: "success",
+      description: `Successfully removed a streamer from Patchwork.`,
+    });
+
+		refresh()
   } catch {}
 }
 

@@ -6,7 +6,8 @@ const { $api } = useNuxtApp();
 
 const schema = z.object({
   username: z.string(),
-  type: z.enum(["youtube", "twitch", "kick"]),
+  type: z.enum(["youtube", "twitch", "kick", "parti", "rumble"]),
+	platform: z.string().optional(),
   webhook: z
     .string()
     .url("Must be a URL.")
@@ -22,6 +23,7 @@ const state = reactive<Partial<Schema>>({
   username: undefined,
   type: "youtube",
   webhook: undefined,
+	platform: undefined
 });
 
 const toast = useToast();
@@ -78,11 +80,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           >
             <USelectMenu
               v-model="state.type"
-              :items="['youtube', 'twitch', 'kick']"
+              :items="['youtube', 'twitch', 'kick', 'parti', 'rumble']"
               required
               class="w-full"
             />
           </UFormField>
+
+					<UFormField v-if="state.type === 'parti'" label="Social Media" hint="For Parti only, you'll find it in their URL to their channel.">
+						<UInput v-model="state.platform" class="w-full" />
+					</UFormField>
         </div>
 
         <UFormField
