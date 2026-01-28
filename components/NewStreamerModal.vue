@@ -88,7 +88,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 					</template>
 
 					<div class="space-y-4">
-						<UFormField label="Clip Length (seconds)" name="config.clipLength"
+						<UFormField label="Clip Length from Live clipping (seconds)" name="config.clipLength"
 							description="Must be between 60 and 120 seconds.">
 							<UInput v-model.number="state.config.clipLength" type="number" min="60" max="120" />
 						</UFormField>
