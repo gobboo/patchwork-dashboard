@@ -66,7 +66,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 		<template #body>
 			<UForm :schema="schema" :state="state" class="space-y-4 w-full" @submit="onSubmit">
 				<!-- Username + Platform -->
-				<div class="flex gap-x-2">
+				<div class="flex">
 					<UFormField label="Username" name="username" required class="flex-1"
 						description="Streamer username on the selected platform.">
 						<UInput v-model="state.username" />
@@ -95,7 +95,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 						<UFormField label="Live Clipping Enabled" name="config.liveClippingEnabled"
 							description="Automatically clip while the streamer is live.">
-							<UToggle v-model="state.config.liveClippingEnabled" />
+							<USwitch v-model="state.config.liveClippingEnabled" />
 						</UFormField>
 					</div>
 				</UCard>
