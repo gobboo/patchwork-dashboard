@@ -39,7 +39,7 @@ const state = reactive<Schema>({
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
 	try {
-		await $api("/streams", {
+		await $api("/streamers/add", {
 			method: "POST",
 			body: state, // no stringify needed if $api wraps fetch
 		});
